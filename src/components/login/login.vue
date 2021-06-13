@@ -36,8 +36,7 @@ export default {
 
       const {data, meta: {msg, status}} = res.data
       if (status === 200) {
-        // alert(msg)
-        // this.msg = msg
+        localStorage.setItem('_token', data.token)
         this.$router.push({name: 'home'})
         this.$message(msg)
       } else {
