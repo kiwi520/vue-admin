@@ -25,6 +25,17 @@ HttpClient.install = function (Vue, options) {
   // 4. 添加实例方法
   axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 
+  axios.interceptors.request.use(config => {
+    if (config.method === 'put') {
+      config.data = JSON.stringify(config.data)
+      config.headers['Content-Type'] = 'application/json;charset=utf-8'
+    }
+
+    config.headers['Authorization'] = localStorage.getItem('_token') || ''
+    // config.headers['Content-Type'] = 'application/x-www-urlencoded'
+    return config
+  })
+
   Vue.prototype.$http = axios
 }
 

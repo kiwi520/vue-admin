@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import moment from 'moment'
 import router from './router'
 
 import ElementUI from 'element-ui'
@@ -13,6 +14,11 @@ Vue.use(ElementUI)
 Vue.use(HttpClient)
 
 Vue.config.productionTip = false
+
+// 全局过滤器 处理日期
+Vue.filter('fmtDate', val => {
+  return moment(val).format('YYYY-MM-DD')
+})
 
 /* eslint-disable no-new */
 new Vue({
